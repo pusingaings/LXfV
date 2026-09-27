@@ -2,263 +2,390 @@
 
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LXfVlnvJ1</title>
-  <link href="/images/favicon.png" rel="icon" type="image/ico">
-  <link href="/images/favicon.png" rel="icon" type="image/png">
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:Arial,sans-serif;
-    }
 
-```
-body{
-  background:#f3f3f3;
-  color:#111;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
+<meta charset="UTF-8">
+<title>LXfVlnvJ1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+
+/* ANTI COPY */
+-webkit-user-select:none;
+-moz-user-select:none;
+-ms-user-select:none;
+user-select:none;
 }
 
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 60px;
+/* FULLSCREEN LAYOUT */
+
+html,body{
+width:100%;
+height:100%;
+background:#000;
+font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+overflow:hidden;
+color:#fff;
 }
 
-.logo{
-  text-decoration:none;
-  color:#0f172a;
-  font-size:18px;
-  font-weight:bold;
+/* sembunyikan elemen lama */
+
+header,
+.actions,
+footer{
+display:none;
 }
 
-.upload-btn{
-  text-decoration:none;
-  background:#0f172a;
-  color:white;
-  padding:12px 24px;
-  border-radius:999px;
-  font-size:14px;
+/* container fullscreen */
+
+.main{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#000;
 }
 
-.container{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:18px;
-  min-height:calc(100vh - 100px);
-}
+/* wrapper */
 
 .video-wrapper{
-  width:720px;
-  max-width:90%;
-  background:black;
-  border-radius:10px;
-  overflow:hidden;
+width:100%;
+height:100%;
 }
+
+/* VIDEO FULLSCREEN */
 
 video{
-  width:100%;
-  display:block;
-  background:black;
+width:100vw;
+height:100vh;
+object-fit:contain;
+background:#000;
+pointer-events:auto;
 }
 
-.share-btn{
-  text-decoration:none;
-  background:#0f172a;
-  color:white;
-  padding:12px 24px;
-  border-radius:999px;
-  font-size:14px;
+/* popup */
+
+.popup-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.75);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+opacity:0;
+pointer-events:none;
+transition:.25s;
 }
 
-footer{
-  text-align:center;
-  padding:24px;
-  font-size:13px;
-  color:#666;
-  display:flex;
-  justify-content:center;
-  gap:30px;
+.popup-overlay.active{
+opacity:1;
+pointer-events:auto;
 }
 
-footer a{
-  text-decoration:none;
-  color:#666;
+.popup-box{
+background:#111;
+padding:26px;
+border-radius:10px;
+text-align:center;
+max-width:320px;
+width:90%;
+border:1px solid #222;
 }
 
-@media(max-width:768px){
-  header{
-    padding:14px 16px;
-  }
-
-  .container{
-    padding:0 12px;
-    min-height:calc(100vh - 70px);
-  }
-
-  footer{
-    flex-direction:column;
-    gap:10px;
-  }
+.popup-box h3{
+font-size:18px;
+margin-bottom:10px;
 }
-```
 
-  </style>
+.popup-box p{
+font-size:14px;
+color:#aaa;
+margin-bottom:18px;
+}
+
+.popup-actions{
+display:flex;
+justify-content:center;
+}
+
+.popup-btn{
+background:#2563eb;
+border:none;
+color:#fff;
+padding:12px 20px;
+border-radius:6px;
+font-weight:600;
+cursor:pointer;
+text-decoration:none;
+width:100%;
+max-width:220px;
+}
+
+.popup-btn:hover{
+background:#1d4ed8;
+}
+
+</style>
+
 </head>
+
 <body oncontextmenu="return false">
 
 <header>
 
+<div class="header-container">
+<div class="logo">popunderrr</div>
+<a href="" class="upload-btn">Upload</a>
+</div>
+
+<script src="https://emergeddeterminationimperfect.com/cd/fa/42/cdfa42275bc46e91995ad14314852e21.js"></script>
+
 </header>
 
-<main class="container">
+<div class="main">
 
-  <div class="video-wrapper">
+<div class="video-wrapper">
 
 <video
-  id="video"
-  controls
-  controlsList="nodownload noplaybackrate"
-  disablePictureInPicture
-  autoplay
-  muted
-  playsinline
-  preload="auto"
->
-</video>
+id="video"
+autoplay
+playsinline
+controls
+controlsList="nodownload noplaybackrate"></video>
 
-  </div>
+</div>
+
+</div>
 
 <footer>
-
+© 2026 Anastasia
 </footer>
 
+<!-- VIDEO LOADER -->
+
 <script>
-  // Disable right click
-  document.addEventListener('contextmenu', event => event.preventDefault());
 
-  // Disable common inspect shortcuts
-  document.addEventListener('keydown', function(e){
+const video = document.getElementById("video");
 
-    // F12
-    if(e.key === "F12"){
-      e.preventDefault();
-    }
+const params = new URLSearchParams(window.location.search);
+const VIDEO_ID = params.get("id");
 
-    // CTRL+SHIFT+I
-    if(e.ctrlKey && e.shiftKey && e.key === 'I'){
-      e.preventDefault();
-    }
+if(VIDEO_ID){
 
-    // CTRL+SHIFT+J
-    if(e.ctrlKey && e.shiftKey && e.key === 'J'){
-      e.preventDefault();
-    }
+document.title = VIDEO_ID;
 
-    // CTRL+U
-    if(e.ctrlKey && e.key === 'u'){
-      e.preventDefault();
-    }
+let base = "https://cdn.slicedrive.com/" + VIDEO_ID;
 
-  });
+function loadVideo(src){
+video.src = src;
+video.load();
+}
 
-  // Prevent drag download
-  const video = document.getElementById("video");
+loadVideo(base + ".mp4");
 
-  video.addEventListener('dragstart', e => {
-    e.preventDefault();
-  });
+video.onerror = () => {
 
-  // VIDEO LOADER
-  const params = new URLSearchParams(window.location.search);
-  const VIDEO_ID = params.get("id");
+if(!video.dataset.mov){
 
-  if(VIDEO_ID){
+video.dataset.mov = 1;
+loadVideo(base + ".mov");
 
-    document.title = VIDEO_ID;
+}
 
-    let base = "https://cdn.slicedrive.com/" + VIDEO_ID;
+};
 
-    function loadVideo(src){
-      video.src = src;
-      video.load();
-    }
+video.play().catch(()=>{});
 
-    loadVideo(base + ".mp4");
+}else{
 
-    video.addEventListener("loadeddata", function(){
-      video.play().catch(function(){
-        console.log("Autoplay was blocked by the browser.");
-      });
-    }, {once:true});
+document.querySelector(".main").innerHTML =
+"<h2>Video not found</h2>";
 
-    video.onerror = function(){
-
-      if(!video.dataset.mov){
-
-        video.dataset.mov = 1;
-        loadVideo(base + ".mov");
-
-        video.addEventListener("loadeddata", function(){
-          video.play().catch(function(){
-            console.log("Autoplay was blocked by the browser.");
-          });
-        }, {once:true});
-
-      }
-
-    };
-
-  }else{
-
-    document.querySelector(".container").innerHTML =
-    "<h2>Video not found</h2>";
-
-  }
+}
 
 </script>
 
-</body>
+<!-- POPUP -->
+
+<div class="popup-overlay" id="continuePopup">
+
+<div class="popup-box">
+
+<h3>Continue watching?</h3>
+
+<p>Press continue to keep watching the video.</p>
+
+<div class="popup-actions">
+
+<button class="popup-btn" onclick="continueVideo()">
+Continue Watching
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- POPUP SCRIPT -->
+
 <script>
-(function () {
-    const targetUrl = "https://uze.infokuningan24jam.com/j3g04I-OUQtoK/?vids";
-    const maxPopunders = 2;
-    const storageKey = "popunder_count";
 
-    let count = parseInt(localStorage.getItem(storageKey) || "0", 10);
+const DIRECT_LINK = "https://emergeddeterminationimperfect.com/zn6b1gd97?key=3e805236d1a750075bd5f770cc821900";
 
-    document.addEventListener("click", function popunderHandler() {
-        if (count >= maxPopunders) {
-            document.removeEventListener("click", popunderHandler);
-            return;
-        }
+const popup = document.getElementById("continuePopup");
+const videoPlayer = document.getElementById("video");
 
-        const newWindow = window.open(
-            targetUrl,
-            "_blank",
-            "noopener,noreferrer"
-        );
+let halfTriggered = false;
 
-        if (newWindow) {
-            count++;
-            localStorage.setItem(storageKey, count);
-        }
+function showPopup(){
 
-        if (count >= maxPopunders) {
-            document.removeEventListener("click", popunderHandler);
-        }
-    });
-})();
+popup.classList.add("active");
+
+if(videoPlayer){
+videoPlayer.pause();
+}
+
+}
+
+function continueVideo(){
+
+popup.classList.remove("active");
+
+if(videoPlayer){
+videoPlayer.play().catch(()=>{});
+}
+
+}
+
+const firstDelay =
+Math.floor(Math.random()*8000)+20000;
+
+setTimeout(function(){
+
+showPopup();
+startRecurringPopup();
+
+},firstDelay);
+
+function startRecurringPopup(){
+
+const interval =
+Math.floor(Math.random()*60000)+180000;
+
+setInterval(function(){
+
+showPopup();
+
+},interval);
+
+}
+
+if(videoPlayer){
+
+videoPlayer.addEventListener("timeupdate",function(){
+
+if(!videoPlayer.duration) return;
+
+let progress =
+videoPlayer.currentTime /
+videoPlayer.duration;
+
+if(progress >= 0.5 && !halfTriggered){
+
+halfTriggered = true;
+showPopup();
+
+}
+
+});
+
+}
+
 </script>
+
+<!-- PROTECTION SCRIPT -->
+
+<script>
+
+/* Disable right click */
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+/* Disable drag */
+document.addEventListener("dragstart", function(e){
+e.preventDefault();
+});
+
+/* Disable keyboard shortcuts */
+
+document.onkeydown = function(e){
+
+if(
+e.ctrlKey &&
+(
+e.key === "u" ||
+e.key === "c" ||
+e.key === "s" ||
+e.key === "a" ||
+e.key === "i" ||
+e.key === "j"
+)
+){
+return false;
+}
+
+/* Block F12 */
+
+if(e.key === "F12"){
+return false;
+}
+
+};
+
+/* Anti iframe */
+
+if (window.top !== window.self) {
+window.top.location = window.self.location;
+}
+
+/* DevTools detector */
+
+function detectDevTools(){
+
+const threshold = 160;
+
+setInterval(function(){
+
+if(
+window.outerWidth - window.innerWidth > threshold ||
+window.outerHeight - window.innerHeight > threshold
+){
+
+document.body.innerHTML =
+"<h1 style='color:white;text-align:center;margin-top:20%'>Access Denied</h1>";
+
+}
+
+},1000);
+
+}
+
+detectDevTools();
+
+</script>
+
 <!-- Histats.com  START  (aync)-->
 <script type="text/javascript">var _Hasync= _Hasync|| [];
 _Hasync.push(['Histats.start', '1,4972363,4,0,0,0,00010000']);
@@ -269,7 +396,8 @@ var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async
 hs.src = ('//s10.histats.com/js15_as.js');
 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
 })();</script>
-<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4972363&101" alt="free html hit counter" border="0"></a></noscript>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4972363&101" alt="" border="0"></a></noscript>
 <!-- Histats.com  END  -->
 
+</body>
 </html>
